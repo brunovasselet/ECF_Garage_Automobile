@@ -1,0 +1,21 @@
+body {
+    background-color: #1c1c1c;
+}
+
+.modal-connexion {
+    height: 100%;
+}
+
+.modal-content {
+    margin-top: 80%;
+}
+
+.carousel, .carousel-item {
+    height: 500px;
+}
+
+.title-services {
+    color: #ffffff;
+    text-align: center;
+    text-decoration: underline;
+}
