@@ -29,12 +29,49 @@ body {
     height: 500px;
 }
 
-.title-services {
+.carousel-item {
+    background-color: #212529;
+}
+
+.titre-services {
+    color: #ffffff;
+    text-align: center;
+    text-decoration: underline;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.reparations {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+.card {
+    margin: 10px;
+}
+
+.titre-horaires {
     color: #ffffff;
     text-align: center;
     text-decoration: underline;
 }
 
+.horaires {
+    color: #ffffff;
+    width: 500px;
+    margin-top: 50px;
+    font-size: 20px;
+    border: 1px solid;
+}
+
+.jours {
+    padding-left: 20px;
+}
+
+td {
+    width: 150px;
+    border: 1px solid;
+}
 /*=============================
 ===========Gestion=============
 =============================*/
@@ -77,4 +114,27 @@ body {
 textarea {
     height: 100px;
     margin-bottom: 20px;
+}
+
+/*=============================
+===========Contact=============
+=============================*/
+
+.titre-contact {
+    color: #ffffff;
+    text-align: center;
+    text-decoration: underline;
+    margin-top: 50px;
+}
+
+.form-contact {
+    width: 1000px;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.message {
+    height: 200px;
+    width: 1000px;
+    border-radius: 20px;
 }

@@ -55,7 +55,7 @@ if ($result->num_rows != 1) {
         </button>
 
         <div class="collapse navbar-collapse d-lg-flex" id="navbarsExample11">
-          <a class="navbar-brand col-lg-3 me-0" href="#">Garage V. Parrot</a>
+          <a class="navbar-brand col-lg-3 me-0" href="/ECF_Garage_Automobile/index.php">Garage V. Parrot</a>
           <ul class="navbar-nav col-lg-6 justify-content-lg-center">
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="#">Gestion</a>
@@ -74,7 +74,7 @@ if ($result->num_rows != 1) {
         </ul>
     </li>";
 } else {
-    echo "<button class='w-100 mb-2 btn btn-lg rounded-3 btn-primary' type='submit' data-bs-toggle='modal' data-bs-target='#connexion'>Connexion</button>";
+    echo "<button class='w-30 mb-2 btn btn-lg rounded-3 btn-primary' type='submit' data-bs-toggle='modal' data-bs-target='#connexion'>Connexion</button>";
 }
 ?>
 </div>
@@ -139,9 +139,9 @@ foreach ($recipes as $recipe) {
 
         <form class="" method="post" action="/ECF_Garage_Automobile/modifications/modification-reparation1.php">
 
-        <input type="text" class="form-control rounded-3" id="floatingInput" name="name" value="<?php echo $name; ?>" required>
+        <input type="text" class="form-control rounded-3" id="floatingInput" name="name" value="<?php echo $name; ?>">
 
-            <textarea type="text" class="form-control rounded-3 description-label-visible" id="floatingInput" name="description" placeholder="Description"  require="false"><?php echo $description; ?></textarea>
+            <textarea type="text" class="form-control rounded-3" id="floatingInput" name="description" placeholder="Description"  require="false"><?php echo $description; ?></textarea>
           <div class="text-center">
           <button class="mb-2 btn rounded-3 btn-primary" type="submit" name="submit">Modifier</button>
           </div>
@@ -201,9 +201,9 @@ foreach ($recipes as $recipe) {
 
         <form class="" method="post" action="/ECF_Garage_Automobile/modifications/modification-reparation2.php">
 
-        <input type="text" class="form-control rounded-3" id="floatingInput" name="name" value="<?php echo $name; ?>" required>
+        <input type="text" class="form-control rounded-3" id="floatingInput" name="name" value="<?php echo $name; ?>">
 
-            <textarea type="text" class="form-control rounded-3 description-label-visible" id="floatingInput" name="description" placeholder="Description"  require="false"><?php echo $description; ?></textarea>
+            <textarea class="message" type="text" class="form-control rounded-3" id="floatingInput" name="description" placeholder="Description"  require="false"><?php echo $description; ?></textarea>
           <div class="text-center">
           <button class="mb-2 btn rounded-3 btn-primary" type="submit" name="submit">Modifier</button>
           </div>
@@ -263,9 +263,9 @@ foreach ($recipes as $recipe) {
 
         <form class="" method="post" action="/ECF_Garage_Automobile/modifications/modification-reparation3.php">
 
-        <input type="text" class="form-control rounded-3" id="floatingInput" name="name" value="<?php echo $name; ?>" required>
+        <input type="text" class="form-control rounded-3" id="floatingInput" name="name" value="<?php echo $name; ?>">
 
-            <textarea type="text" class="form-control rounded-3 description-label-visible" id="floatingInput" name="description" placeholder="Description"  require="false"><?php echo $description; ?></textarea>
+            <textarea type="text" class="form-control rounded-3" id="floatingInput" name="description" placeholder="Description"  require="false"><?php echo $description; ?></textarea>
           <div class="text-center">
           <button class="mb-2 btn rounded-3 btn-primary" type="submit" name="submit">Modifier</button>
           </div>
@@ -326,9 +326,9 @@ foreach ($recipes as $recipe) {
 
         <form class="" method="post" action="/ECF_Garage_Automobile/modifications/modification-reparation4.php">
 
-        <input type="text" class="form-control rounded-3" id="floatingInput" name="name" value="<?php echo $name; ?>" required>
+        <input type="text" class="form-control rounded-3" id="floatingInput" name="name" value="<?php echo $name; ?>">
 
-            <textarea type="text" class="form-control rounded-3 description-label-visible" id="floatingInput" name="description" placeholder="Description"  require="false"><?php echo $description; ?></textarea>
+            <textarea type="text" class="form-control rounded-3" id="floatingInput" name="description" placeholder="Description"  require="false"><?php echo $description; ?></textarea>
           <div class="text-center">
           <button class="mb-2 btn rounded-3 btn-primary" type="submit" name="submit">Modifier</button>
           </div>

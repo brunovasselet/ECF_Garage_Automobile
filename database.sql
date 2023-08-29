@@ -20,6 +20,16 @@ CREATE TABLE IF NOT EXISTS Services (
     description TEXT
 );
 
+
+CREATE TABLE IF NOT EXISTS Contact (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255),
+    lastname VARCHAR(255),
+    email VARCHAR(255),
+    phone VARCHAR(10),
+    message TEXT
+);
+
 INSERT INTO Administrator (email, mdp)
 VALUES ('admin@gmail.com', '123456');
 

@@ -76,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="password" class="form-control rounded-3"name="mdp" placeholder="Password">
             <label for="floatingPassword">Mot de Passe</label>
           </div>
-          <button class="w-30 mb-2 btn btn-lg rounded-3 btn-primary" type="submit" name="valider">Connexion</button>
+          <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit" name="valider">Connexion</button>
           <hr class="my-4">
         </form>
       </div>
@@ -94,13 +94,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <a class="navbar-brand col-lg-3 me-0" href="">Garage V. Parrot</a>
           <ul class="navbar-nav col-lg-6 justify-content-lg-center">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Accueil</a>
+              <a class="nav-link" href="/ECF_Garage_Automobile/index.php">Accueil</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Voitures D'occasions</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/ECF_Garage_Automobile/contact.php">Contact</a>
+              <a class="nav-link active" aria-current="page" href="">Contact</a>
             </li>
           </ul>
           <div class="d-lg-flex col-lg-3 justify-content-lg-end">
@@ -116,7 +116,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </ul>
     </li>";
 } else {
-    echo "<button class='w-100 mb-2 btn btn-lg rounded-3 btn-primary' type='submit' data-bs-toggle='modal' data-bs-target='#connexion'>Connexion</button>";
+    echo "<button class='w-30 mb-2 btn btn-lg rounded-3 btn-primary' type='submit' data-bs-toggle='modal' data-bs-target='#connexion'>Connexion</button>";
 }
 ?>
 </div>
@@ -128,98 +128,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
 
-<div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2" class=""></button>
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3" class="active" aria-current="true"></button>
+<h3 class="titre-contact">Nous Contacter</h3>
+
+<center>
+
+<form class="form-contact" method="post" action="">
+<div class="form-floating mb-3">
+<input type="text" class="form-control rounded-3" name="name" required>
+    <label for="floatingInput">Nom</label>
     </div>
-    <div class="carousel-inner">
-      <div class="carousel-item">
-        <center><img src="/ECF_Garage_Automobile/img/Voitures/peugeot208.jpg" alt="Image de la Peugeot 208"></center>
-        <div class="container">
-          <div class="carousel-caption">
-            <h1>Peugeot 208</h1>
-            <p class="opacity-75">La peugeot 208 d'occasion.</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Voir l'Offre</a></p>
-          </div>
-        </div>
-      </div>
-      <div class="carousel-item">
-      <center><img src="/ECF_Garage_Automobile/img/Voitures/renault-clio-5.jpg" alt="Image de la Renault Clio 5"></center>
-        <div class="container">
-          <div class="carousel-caption">
-            <h1>Renault Clio 5</h1>
-            <p>La Renault Clio 5 d'occasion.</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Voir l'Offre</a></p>
-          </div>
-        </div>
-      </div>
-      <div class="carousel-item active">
-      <center><img height="600px" src="/ECF_Garage_Automobile/img/Voitures/citroen-c4.jpg" alt="Image de la Renault Clio 5"></center>
-        <div class="container">
-          <div class="carousel-caption">
-            <h1>Citroën C4</h1>
-            <p>La Citroën C4 d'occasion.</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Voir l'Offre</a></p>
-          </div>
-        </div>
-      </div>
+    <div class="form-floating mb-3">
+    <input type="text" class="form-control rounded-3" name="lastname" required>
+    <label for="floatingInput">Prénom</label>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
+    <div class="form-floating mb-3">
+    <input type="email" class="form-control rounded-3" name="email" required>
+    <label for="floatingInput">Email</label>
+    </div>
+    <div class="form-floating mb-3">
+    <input type="text" class="form-control rounded-3" name="phone" required>
+    <label for="floatingInput">Numero de Téléphone</label>
+    </div>
+    <div class="form-floating mb-3">
+    <textarea class="message" type="text" class="form-control rounded-3" id="floatingInput" name="message"  require="false" required></textarea>
+    <label for="floatingInput">Message</label>
+    </div>
+    <button class="w-30 mb-2 btn btn-lg rounded-3 btn-primary " type="submit" name="valider">Envoyer</button>
+</form>
 
-  <h2 class="titre-services">Besoin de Réparations ?</h2>
-
-  <?php
-try
-{
-  // On se connecte à MySQL
-  $mysqlClient = new PDO('mysql:host=localhost;dbname=garage;charset=utf8', 'root', 'root');
-}
-catch(Exception $e)
-{
-  // En cas d'erreur, on affiche un message et on arrête tout
-        die('Erreur : '.$e->getMessage());
-}
-
-// Si tout va bien, on peut continuer
-
-// On récupère tout le contenu de la table recipes
-
-$sqlQuery = "SELECT * FROM services WHERE id";
-$recipesStatement = $mysqlClient->prepare($sqlQuery);
-$recipesStatement->execute();
-$recipes = $recipesStatement->fetchAll();
-
-// On affiche chaque recette une à une
-
-foreach ($recipes as $recipe) {
-
-    $name = $recipe["name"];
-    $description = $recipe["description"];
-
-    echo "<ul>
-          <div class='reparations'>
-          <div class='card' style='width: 25rem;'>
-          <div class='card-body'>
-          <h5 class='card-title'>". $recipe["name"] ."</h5>
-          <p class='card-text'>". $recipe["description"] ."</p>
-          </div>
-          </div>
-          </div>
-          </ul>";
-
-          
-    
-} ?>
+</center>
 
 <h3 class="titre-horaires">Les Horaires D'ouvertures</h3>
 
