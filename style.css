@@ -1,9 +1,24 @@
 body {
     background-color: #1c1c1c;
+    overflow-x: hidden;
 }
 
 .modal-connexion {
     height: 100%;
+}
+
+.profil {
+    height: 50px;
+    width: 50px;
+    border-radius: 25px;
+}
+
+.profil:hover {
+    cursor: pointer;
+}
+
+.dropdown {
+    margin-right: 100px;
 }
 
 .modal-content {
@@ -18,4 +33,48 @@ body {
     color: #ffffff;
     text-align: center;
     text-decoration: underline;
+}
+
+/*=============================
+===========Gestion=============
+=============================*/
+
+
+.gestion-staff {
+    color: #ffffff;
+    text-align: center;
+    text-decoration: underline;
+    margin-top: 50px;
+}
+
+.gestion-services {
+    color: #ffffff;
+    text-align: center;
+    text-decoration: underline;
+    margin-top: 50px;
+}
+
+.carrosserie {
+    color: #ffffff;
+    background-color: #333333;
+    width: 1000px;
+    margin-top: 50px;
+    border-radius: 25px;
+}
+
+.titre-service {
+    padding-top: 20px;
+}
+
+.modification-service {
+    margin-bottom: 20px;
+}
+
+.form-control {
+    margin-top: 20px;
+}
+
+textarea {
+    height: 100px;
+    margin-bottom: 20px;
 }

@@ -1,3 +1,9 @@
+<?php
+
+session_start();
+$email = "email";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +17,66 @@
 </head>
 
 <header>
+
+<?php
+        if(isset($_SESSION['email'])){
+            echo "<h1>Vous êtes déjà connecté</h1>";
+        } else {
+            if(isset($_POST['valider'])){
+                if(!isset($_POST['email'],$_POST['mdp'])){
+                    echo "Un des champs n'est pas reconnu.";
+                } else {
+                    $mysqli=mysqli_connect('localhost','root','root','garage');
+                    if(!$mysqli) {
+                        echo "Erreur de connexion à la BDD";
+                    } else {
+                        $Email='mail';
+                        $Mdp='mdp';
+                        $req=mysqli_query($mysqli,"SELECT * FROM administrator WHERE email='$Email' AND mdp='$Mdp'");
+                        if(mysqli_num_rows($req)!=1){
+                            echo "Mail ou mot de passe incorrect.";
+                        } else {
+                            $_SESSION['mail']=$Email;
+                            echo "Vous êtes connecté avec succès $Email!";
+                            $TraitementFini=true;
+                        }
+                    }
+                }
+            }
+            if(!isset($TraitementFini)){
+                ?>
+
+<div class="modal fade modal-connexion" id="connexion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+    <div class="modal-content rounded-4 shadow" id="connexion">
+      <div class="modal-header p-5 pb-4 border-bottom-0">
+        <h1 class="fw-bold mb-0 fs-2">Connexion</h1>
+        <button type="button" class="btn-close" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body p-5 pt-0">
+        <form class="" method="post">
+          <div class="form-floating mb-3">
+            <input type="email" class="form-control rounded-3" name="email" placeholder="name@example.com">
+            <label for="floatingInput">Adresse Email</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="password" class="form-control rounded-3"name="mdp" placeholder="Password">
+            <label for="floatingPassword">Mot de Passe</label>
+          </div>
+          <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit" name="valider">Connexion</button>
+          <hr class="my-4">
+        </form>
+      </div>
+    </div>
+</div>
+</div>
+
+                
+                <?php
+            }
+        }
+        ?>
 
 <nav class="navbar navbar-dark navbar-expand-lg bg-dark" aria-label="Thirteenth navbar example">
       <div class="container-fluid">
@@ -26,37 +92,24 @@
             </li>
           </ul>
           <div class="d-lg-flex col-lg-3 justify-content-lg-end">
-            <button class="btn btn-primary connexion" data-bs-toggle="modal" data-bs-target="#connexion">Se Connecter</button>
+          <?php
+          if(isset($_POST['email'])){
+            echo "<li class='nav-item dropdown'>
+          <img class='profil dropdown-toggle' data-bs-toggle='dropdown' aria-expanded='false' src='img/photo_de_profil.jpg' alt='Profil'>
+          <ul class='dropdown-menu'>
+                <li><p class='dropdown-item'>Administrateur</p></li>
+                <li><a class='dropdown-item' href='gestion.php'>Gestion</a></li>
+                <li><a class='dropdown-item' href='deconnexion.php'>Deconnexion</a></li>
+              </ul>
+              </li>";
+          }else{
+            echo "<button class='w-100 mb-2 btn btn-lg rounded-3 btn-primary' type='submit' data-bs-toggle='modal' data-bs-target='#connexion'>Connexion</button>";
+          }
+          ?>
           </div>
         </div>
       </div>
     </nav>
-
-    <div class="modal fade modal-connexion" id="connexion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-    <div class="modal-content rounded-4 shadow" id="connexion">
-      <div class="modal-header p-5 pb-4 border-bottom-0">
-        <h1 class="fw-bold mb-0 fs-2">Connexion</h1>
-        <button type="button" class="btn-close" aria-label="Close"></button>
-      </div>
-
-      <div class="modal-body p-5 pt-0">
-        <form class="" method="post" action="/ECF_Garage_Automobile/connexion/connexion.php">
-          <div class="form-floating mb-3">
-            <input type="email" class="form-control rounded-3" id="floatingInput" placeholder="name@example.com">
-            <label for="floatingInput">Adresse Email</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input type="password" class="form-control rounded-3" id="floatingPassword" placeholder="Password">
-            <label for="floatingPassword">Mot de Passe</label>
-          </div>
-          <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Connexion</button>
-          <hr class="my-4">
-        </form>
-      </div>
-    </div>
-</div>
-</div>
 
 </header>
 
