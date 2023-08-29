@@ -1,6 +1,13 @@
 <?php
 session_start();
 
+
+if (!(isset($_SESSION["logged_in"]) && $_SESSION["logged_in"])) {
+
+    header("Location: /ECF_Garage_Automobile/index.php");
+    exit();
+}
+
 $servername = "localhost";
 $username = "root";
 $password = "root";
@@ -9,19 +16,22 @@ $dbname = "garage";
 $conn = new mysqli($servername, $username, $password, $dbname);
 
 if ($conn->connect_error) {
-    die("Erreur de connexion à la base de données : " . $conn->connect_error);
+    die("Connexion échouée : " . $conn->connect_error);
 }
 
-$query = "SELECT email FROM administrator WHERE email = 'patron@gmail.com'";
+$email = $_SESSION["email"]; 
 
-$result = $conn->query($query);
 
-if ($result->num_rows === 0) {
+$sql = "SELECT * FROM administrator WHERE email = '$email'";
+$result = $conn->query($sql);
+
+if ($result->num_rows != 1) {
+  
     header("Location: /ECF_Garage_Automobile/index.php");
     exit();
 }
 
-$conn->close();
+
 ?>
 
 <!DOCTYPE html>
@@ -53,23 +63,24 @@ $conn->close();
           </ul>
           <div class="d-lg-flex col-lg-3 justify-content-lg-end">
           <?php
-          if(!isset($_SESSION['mail'])){
+
+          if (isset($_SESSION["logged_in"]) && $_SESSION["logged_in"]) {
           echo "<li class='nav-item dropdown'>
           <img class='profil dropdown-toggle' data-bs-toggle='dropdown' aria-expanded='false' src='img/photo_de_profil.jpg' alt='Profil'>
           <ul class='dropdown-menu'>
-                <li><p class='dropdown-item'>Administrateur</p></li>
-                <li><a class='dropdown-item' href='#'>Gestion</a></li>
-                <li><a class='dropdown-item' href='deconnexion.php'>Deconnexion</a></li>
-              </ul>
-              </li>";
-          }else{
-            echo "<button class='w-100 mb-2 btn btn-lg rounded-3 btn-primary' type='submit'>Connexion</button>";
-          }
-          ?>
-          </div>
-        </div>
-      </div>
-    </nav>
+            <li><p class='dropdown-item'>Administrateur</p></li>
+            <li><a class='dropdown-item' href='gestion.php'>Gestion</a></li>
+            <li><a class='dropdown-item' href='deconnexion.php'>Déconnexion</a></li>
+        </ul>
+    </li>";
+} else {
+    echo "<button class='w-100 mb-2 btn btn-lg rounded-3 btn-primary' type='submit' data-bs-toggle='modal' data-bs-target='#connexion'>Connexion</button>";
+}
+?>
+</div>
+</div>
+</div>
+</nav>
 
 </header>
 

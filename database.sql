@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS Services (
 );
 
 INSERT INTO Administrator (email, mdp)
-VALUES ('patron@gmail.com', '123456');
+VALUES ('admin@gmail.com', '123456');
 
 INSERT INTO Services (name, description)
 VALUES ('Réparation Carrosserie', 'Jantes éraflées, griffure sur le tableau de bord ou intérieur de portière, bosse ou rayure sur votre carrosserie voiture…? Confiez nous la réparation carrosserie de votre véhicule.');

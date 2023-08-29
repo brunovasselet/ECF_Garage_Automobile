@@ -12,7 +12,7 @@ if ($conn->connect_error) {
     die("Erreur de connexion à la base de données : " . $conn->connect_error);
 }
 
-$query = "SELECT email FROM administrator WHERE email = 'patron@gmail.com'";
+$query = "SELECT email FROM administrator WHERE email = 'admin@gmail.com'";
 
 $result = $conn->query($query);
 

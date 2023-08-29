@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-$email = "email";
+
 ?>
 
 <!DOCTYPE html>
@@ -19,32 +19,44 @@ $email = "email";
 <header>
 
 <?php
-        if(isset($_SESSION['email'])){
-            echo "<h1>Vous êtes déjà connecté</h1>";
-        } else {
-            if(isset($_POST['valider'])){
-                if(!isset($_POST['email'],$_POST['mdp'])){
-                    echo "Un des champs n'est pas reconnu.";
-                } else {
-                    $mysqli=mysqli_connect('localhost','root','root','garage');
-                    if(!$mysqli) {
-                        echo "Erreur de connexion à la BDD";
-                    } else {
-                        $Email='mail';
-                        $Mdp='mdp';
-                        $req=mysqli_query($mysqli,"SELECT * FROM administrator WHERE email='$Email' AND mdp='$Mdp'");
-                        if(mysqli_num_rows($req)!=1){
-                            echo "Mail ou mot de passe incorrect.";
-                        } else {
-                            $_SESSION['mail']=$Email;
-                            echo "Vous êtes connecté avec succès $Email!";
-                            $TraitementFini=true;
-                        }
-                    }
-                }
-            }
-            if(!isset($TraitementFini)){
-                ?>
+
+
+$servername = "localhost";
+$username = "root";
+$password = "root";
+$dbname = "garage";
+
+
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+
+if ($conn->connect_error) {
+    die("Connexion échouée : " . $conn->connect_error);
+}
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = $_POST["email"];
+    $mdp = $_POST["mdp"];
+
+
+    $sql = "SELECT * FROM administrator WHERE email = '$email' AND mdp = '$mdp'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows == 1) {
+
+        $_SESSION["logged_in"] = true;
+        $_SESSION["email"] = $email;
+
+
+        header("Location: index.php");
+        exit();
+    } else {
+        $error_message = "Identifiants invalides.";
+    }
+}
+
+?>
 
 <div class="modal fade modal-connexion" id="connexion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
@@ -72,12 +84,6 @@ $email = "email";
 </div>
 </div>
 
-                
-                <?php
-            }
-        }
-        ?>
-
 <nav class="navbar navbar-dark navbar-expand-lg bg-dark" aria-label="Thirteenth navbar example">
       <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample11" aria-controls="navbarsExample11" aria-expanded="false" aria-label="Toggle navigation">
@@ -92,24 +98,25 @@ $email = "email";
             </li>
           </ul>
           <div class="d-lg-flex col-lg-3 justify-content-lg-end">
-          <?php
-          if(isset($_POST['email'])){
-            echo "<li class='nav-item dropdown'>
+<?php
+
+          if (isset($_SESSION["logged_in"]) && $_SESSION["logged_in"]) {
+          echo "<li class='nav-item dropdown'>
           <img class='profil dropdown-toggle' data-bs-toggle='dropdown' aria-expanded='false' src='img/photo_de_profil.jpg' alt='Profil'>
           <ul class='dropdown-menu'>
-                <li><p class='dropdown-item'>Administrateur</p></li>
-                <li><a class='dropdown-item' href='gestion.php'>Gestion</a></li>
-                <li><a class='dropdown-item' href='deconnexion.php'>Deconnexion</a></li>
-              </ul>
-              </li>";
-          }else{
-            echo "<button class='w-100 mb-2 btn btn-lg rounded-3 btn-primary' type='submit' data-bs-toggle='modal' data-bs-target='#connexion'>Connexion</button>";
-          }
-          ?>
-          </div>
-        </div>
-      </div>
-    </nav>
+            <li><p class='dropdown-item'>Administrateur</p></li>
+            <li><a class='dropdown-item' href='gestion.php'>Gestion</a></li>
+            <li><a class='dropdown-item' href='deconnexion.php'>Déconnexion</a></li>
+        </ul>
+    </li>";
+} else {
+    echo "<button class='w-100 mb-2 btn btn-lg rounded-3 btn-primary' type='submit' data-bs-toggle='modal' data-bs-target='#connexion'>Connexion</button>";
+}
+?>
+</div>
+</div>
+</div>
+</nav>
 
 </header>
 
