@@ -5,7 +5,7 @@ session_start();
 ?>
 
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="dark">
+<html lang="en" class="h-100" data-bs-theme="dark"> 
 <head>
 
     <meta charset="UTF-8">
@@ -72,10 +72,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <a class="navbar-brand col-lg-3 me-0" href="">Garage V. Parrot</a>
           <ul class="navbar-nav col-lg-6 justify-content-lg-center">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="">Accueil</a>
+              <a class="nav-link" href="/ECF_Garage_Automobile/index.php">Accueil</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/ECF_Garage_Automobile/occasion.php">Véhicules</a>
+              <a class="nav-link active" aria-current="page" href="">Véhicules</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/ECF_Garage_Automobile/contact.php">Contact</a>
@@ -143,176 +143,110 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
 
-<div id="myCarousel" class="carousel slide mb-6 carousel-garage" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2" class=""></button>
-      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3" class="active" aria-current="true"></button>
-    </div>
-    <div class="carousel-inner">
-      <div class="carousel-item">
-        <center><img src="/ECF_Garage_Automobile/img/Voitures/peugeot208.jpg" alt="Image de la Peugeot 208"></center>
-        <div class="container">
-          <div class="carousel-caption">
-            <h1>Peugeot 208</h1>
-            <p class="opacity-75">La peugeot 208 d'occasion.</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Voir l'Offre</a></p>
-          </div>
-        </div>
-      </div>
-      <div class="carousel-item">
-      <center><img src="/ECF_Garage_Automobile/img/Voitures/renault-clio-5.jpg" alt="Image de la Renault Clio 5"></center>
-        <div class="container">
-          <div class="carousel-caption">
-            <h1>Renault Clio 5</h1>
-            <p class="opacity-75">La Renault Clio 5 d'occasion.</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Voir l'Offre</a></p>
-          </div>
-        </div>
-      </div>
-      <div class="carousel-item active">
-      <center><img height="600px" src="/ECF_Garage_Automobile/img/Voitures/citroen-c4.jpg" alt="Image de la Renault Clio 5"></center>
-        <div class="container">
-          <div class="carousel-caption">
-            <h1>Citroën C4</h1>
-            <p class="opacity-75">La Citroën C4 d'occasion.</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Voir l'Offre</a></p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
+<?php
 
-  <h2 class="titre-services">Besoin de Réparations ?</h2>
-
-  <?php
 try
 {
-  $mysqlClient = new PDO('mysql:host=localhost;dbname=garage;charset=utf8', 'root', 'root');
+  $mysqlClient = new PDO('mysql:host=127.0.0.1;port=3306;dbname=garage;charset=utf8', 'root', 'root');
 }
 catch(Exception $e)
 {
-        die('Erreur : '.$e->getMessage());
+  die('Erreur : '.$e->getMessage());
 }
 
-$sqlQuery = "SELECT * FROM services WHERE id";
+
+$sqlQuery = "SELECT * FROM vehicles WHERE id";
 $recipesStatement = $mysqlClient->prepare($sqlQuery);
 $recipesStatement->execute();
 $recipes = $recipesStatement->fetchAll();
 
 foreach ($recipes as $recipe) {
 
+    $id = $recipe["id"];
     $name = $recipe["name"];
-    $description = $recipe["description"];
+    $price = $recipe["price"];
+    $picture = $recipe["picture"];
+    $date = $recipe["date"];
+    $mileage = $recipe["mileage"];
 
+    ?>
 
-    echo "<div class='d-flex justify-content-center'>
-          <div class='card' style='width: 50rem;'>
-          <div class='card-body'>
-          <h5 class='card-title'>". $recipe["name"] ."</h5>
-          <p class='card-text'>". $recipe["description"] ."</p>
-          </div>
-          </div>
-          </div>
-          </div>";
+<div class='row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 horizontal-cards marge-cards'>
+<div class='row'>
+  <?php
+echo "<div class='col'>
+    <div class='card vehicle-card'>
+            <img class='picture-card' src='/ECF_Garage_Automobile/img/Voitures/". $recipe["picture"] ."' alt='photo de voiture'>
+            <div class='card-body bg-dark text-light vehicle-card-body'>
+                <h3 class='card-text'>". $recipe["name"] ."</h3>
+                <p class='card-text'>". $recipe["price"] ." €</p>
+                <div class='d-flex justify-content-center'>
+                <button class='w-30 mb-2 btn btn-lg rounded-4 btn-success details-vehicles' type='submit' name='valider' data-bs-toggle='modal' data-bs-target='#". $recipe["id"] ."'>Plus</button>
+                </div>
+            </div>
+        </div>
+    </div>";
 
-          
-    
-} ?>
+    ?>
 
 </div>
 </div>
-</div>
-
-<h3 class="title-testimonial">Les Témoignage Clients</h3>
 
 <?php
 
-$serverIp = "127.0.0.1";
-$serverPort = 3306;
-$username = "root";
-$password = "root";
-$dbname = "garage";
+echo "<div class='modal fade modal-details-vehicle' id='". $recipe["id"] ."' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
+          <div class='modal-dialog d-flex justify-content-center align-items-center' style='height: 115vh;'>
+    <div class='modal-content rounded-4 shadow content-vehicles' id='vehicle'>
+      <div class='modal-header p-5 pb-4 border-bottom-0'>
+        <h1 class='fw-bold mb-0 fs-2'>Détails du Véhicule</h1>
+        <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+      </div>
 
-try {
-    $conn = new PDO("mysql:host=$serverIp;port=$serverPort;dbname=$dbname", $username, $password);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
-    die("Connexion échouée : " . $e->getMessage());
-}
-
-$sqlQuery = "SELECT * FROM testimonial WHERE id";
-$recipesStatement = $mysqlClient->prepare($sqlQuery);
-$recipesStatement->execute();
-$recipes = $recipesStatement->fetchAll();
-
-foreach ($recipes as $recipe) {
-
-    $name = $recipe["name"];
-    $comment = $recipe["comment"];
-    $score = $recipe["score"];
-
-echo "<div class='d-flex justify-content-center'>
-        <div class='list-group list-messages'>
-    <a class='list-group-item list-group-item-action d-flex gap-3 py-3 bg-dark' aria-current='true'>
-      <div class='d-flex gap-2 w-100 justify-content-between'>
-        <div>
-          <h6 class='mb-0 info-customer'>" . $recipe["name"] . "</h6>
-          <h6 class='mb-0 subject-customer'>Commentaire: <br>" . $recipe["comment"] . "</h6>
-          <p class='mb-0 message-customer'>Note: " . $recipe["score"] . "/10</p>
+      <div class='modal-body p-5 pt-0'>
+      <div class='text-center'>
+      <img class='picture-vehicle' src='/ECF_Garage_Automobile/img/Voitures/". $recipe["picture"] ."' alt='photo de voiture'>
+      <h3 class='vehicle-title'>". $recipe["name"] ."</h3>
+      <h5 class='specification'>Prix: ". $recipe["price"] ." €</h5>
+      <h5 class='specification'>Année de mise en circulation: ". $recipe["date"] ."</h5>
+      <h5 class='specification'>Kilométrage: ". $recipe["mileage"] ." Km</h5>
+      </div>
+      <h3 class='contact-vehicle'>Nous Contacter:</h3>
+      <div class='d-flex justify-content-center'>
+        <form class='form-vehicle' method='post' action='/ECF_Garage_Automobile/Contact/contact_garage.php'>
+        <div class='form-floating mb-3'>
+        <input type='text' class='form-control rounded-3' name='name' required>
+            <label for='floatingInput'>Nom</label>
+            </div>
+            <div class='form-floating mb-3'>
+            <input type='text' class='form-control rounded-3' name='lastname' required>
+            <label for='floatingInput'>Prénom</label>
+            </div>
+            <div class='form-floating mb-3'>
+            <input type='email' class='form-control rounded-3' name='email' required>
+            <label for='floatingInput'>Email</label>
+            </div>
+            <div class='form-floating mb-3'>
+            <input type='text' class='form-control rounded-3' name='phone' required>
+            <label for='floatingInput'>Numero de Téléphone</label>
+            </div>
+            <div class='form-floating mb-3'>
+            <input type='text' class='form-control rounded-3' name='subject' value='" . $recipe["name"] . " / Identifiant: " . $recipe["id"] . "' readonly>
+            <label for='floatingInput'>Sujet</label>
+            </div>
+            <label class='message-title-detail'>Message:</label>
+            <textarea class='message-vehicle' type='text' class='form-control rounded-3' id='floatingInput' name='message'  require='false' required></textarea> 
+            <button class='w-30 mb-2 btn btn-lg rounded-3 btn-primary ' type='submit' name='valider'>Envoyer</button>
+          </div>
+          <hr class='my-4'>
+        </form>
         </div>
       </div>
-    </a>
-  </div>
+    </div>
+</div>
 </div>";
 
     
 } ?>
-
-<div class="d-flex justify-content-center">
-<button class="w-30 mb-2 btn btn-lg rounded-3 btn-success button-testimonial" type="submit" name="valider" data-bs-toggle='modal' data-bs-target='#testimonial'>Ajouter un Témoignage</button>
-</div>
-
-<div class="modal fade modal-testimonial" id="testimonial" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-    <div class="modal-content rounded-4 shadow" id="testimonial">
-      <div class="modal-header p-5 pb-4 border-bottom-0">
-        <h1 class="fw-bold mb-0 fs-2">Témoignage</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-
-      <div class="modal-body p-5 pt-0">
-        <form method="post" action="/ECF_Garage_Automobile/Score/score.php">
-          <div class="form-floating mb-3">
-            <input type="text" class="form-control rounded-3" name="name" required>
-            <label for="floatingInput">Nom</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input type="text" class="form-control rounded-3" name="comment" required>
-            <label for="floatingPassword">Commentaire</label>
-          </div>
-          <div class="form-floating mb-3">
-            <input type="text" class="form-control rounded-3" name="score" placeholder="/10" required>
-            <label for="floatingPassword">Note</label>
-            <p>Note sur 10.</p>
-          </div>
-          <div class="text-center">
-          <button class="w-30 mb-2 btn btn-lg rounded-3 btn-primary" type="submit" name="valider">Envoyer</button>
-          </div>
-          <hr class="my-4">
-        </form>
-      </div>
-    </div>
-</div>
-</div>
 
 <h3 class="title-timetables">Les Horaires D'ouvertures</h3>
 
@@ -376,7 +310,5 @@ echo "<div class='d-flex justify-content-center'>
   </footer>
 </div>
 
-    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-
+<script src="/ECF_Garage_Automobile/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-</html>

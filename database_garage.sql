@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS Administrator (
     mdp VARCHAR(255)
 );
 
-CREATE TABLE IF NOT EXISTS Staff (
+CREATE TABLE IF NOT EXISTS Employees (
     id INT PRIMARY KEY AUTO_INCREMENT,
     email VARCHAR(255),
     mdp VARCHAR(255)
@@ -27,7 +27,24 @@ CREATE TABLE IF NOT EXISTS Contact (
     lastname VARCHAR(255),
     email VARCHAR(255),
     phone VARCHAR(10),
+    subject VARCHAR(255),
     message TEXT
+);
+
+CREATE TABLE IF NOT EXISTS Testimonial (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255),
+    comment TEXT,
+    score INT CHECK (score >= 1 AND score <= 10)
+);
+
+CREATE TABLE IF NOT EXISTS Vehicles (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255),
+    price VARCHAR(10),
+    picture VARCHAR(255),
+    date VARCHAR(255),
+    mileage VARCHAR(10)
 );
 
 INSERT INTO Administrator (email, mdp)

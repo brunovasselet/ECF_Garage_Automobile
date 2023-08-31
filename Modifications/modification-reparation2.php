@@ -45,6 +45,6 @@ if(isset($_POST['submit'])) {
     ));
 
     // Afficher un message de confirmation
-    header("Location: /ECF_Garage_Automobile/gestion.php");
+    header("Location: /ECF_Garage_Automobile/Management/gestion.php");
 }
 ?>

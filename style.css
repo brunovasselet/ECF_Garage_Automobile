@@ -3,6 +3,10 @@ body {
     overflow-x: hidden;
 }
 
+.nav-link {
+    font-weight: bold;
+}
+
 .modal-connexion {
     height: 100%;
 }
@@ -25,6 +29,10 @@ body {
     margin-top: 80%;
 }
 
+.carousel, h1, p {
+    color: #ffffff;
+}
+
 .carousel, .carousel-item {
     height: 500px;
 }
@@ -42,7 +50,7 @@ body {
 }
 
 .reparations {
-    display: flex;
+    display: inline-flex;
     justify-content: center;
     text-align: center;
 }
@@ -50,15 +58,20 @@ body {
     margin: 10px;
 }
 
-.titre-horaires {
+.title-timetables, .title-testimonial {
     color: #ffffff;
     text-align: center;
     text-decoration: underline;
+    margin-top: 50px;
+}
+
+.button-testimonial {
+    margin-top: 50px;
 }
 
 .horaires {
     color: #ffffff;
-    width: 500px;
+    width: 800px;
     margin-top: 50px;
     font-size: 20px;
     border: 1px solid;
@@ -72,31 +85,55 @@ td {
     width: 150px;
     border: 1px solid;
 }
+
 /*=============================
 ===========Gestion=============
 =============================*/
 
+.list-employees {
+    width: 1000px;
+    color: #ffffff;
+    background-color: #34495E;
+}
+
+.button-supp {
+    margin-top: 5px;
+}
 
 .gestion-staff {
+    margin-bottom: 50px;
+}
+
+.mail-cel, .mdp-cel {
+    width: 200px;
+    height: 30px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.gestion-staff, .customers-messages {
     color: #ffffff;
     text-align: center;
     text-decoration: underline;
-    margin-top: 50px;
 }
 
 .gestion-services {
     color: #ffffff;
     text-align: center;
     text-decoration: underline;
-    margin-top: 50px;
 }
 
 .carrosserie {
     color: #ffffff;
     background-color: #333333;
     width: 1000px;
-    margin-top: 50px;
     border-radius: 25px;
+}
+
+.gestion-staff, .customers-messages, .gestion-services, .carrosserie, .list-group, .button-add, .add-vehicles, .supp-message {
+    margin-top: 50px;
 }
 
 .titre-service {
@@ -114,6 +151,67 @@ td {
 textarea {
     height: 100px;
     margin-bottom: 20px;
+}
+
+.list-group-item {
+    width: 1000px;
+    color: #ffffff;
+}
+
+.vehicle-card {
+    width: 400px;
+    border-color: #1c1c1c;
+    background: none;
+}
+
+.vehicle-card-body {
+    border-radius: 0px 0px 20px 20px;
+}
+
+.content-vehicles {
+    width: 1200px;
+}
+
+.picture-card {
+    border-radius: 20px 20px 0px 0px;
+}
+
+.picture-vehicle {
+    max-width: 1000px;
+}
+
+.vehicle-title {
+    margin-bottom: 50px;
+}
+
+.specification {
+    text-align: left;
+}
+
+.message-title-detail {
+    color: black;
+}
+
+.contact-vehicle {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.form-vehicle, .message-vehicle {
+    width: 800px;
+    border-radius: 10px;
+}
+
+/*=============================
+===========Véhicules=============
+=============================*/
+
+.horizontal-cards {
+    display: inline-flex;
+}
+
+.marge-cards {
+    margin-top: 50px;
 }
 
 /*=============================
@@ -136,5 +234,10 @@ textarea {
 .message {
     height: 200px;
     width: 1000px;
-    border-radius: 20px;
+    border-radius: 10px;
+}
+
+.message-title {
+    color: #ffffff;
+    margin-bottom: 10px;
 }
