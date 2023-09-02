@@ -168,16 +168,8 @@ textarea {
     border-radius: 0px 0px 20px 20px;
 }
 
-.content-vehicles {
-    width: 1200px;
-}
-
 .picture-card {
     border-radius: 20px 20px 0px 0px;
-}
-
-.picture-vehicle {
-    max-width: 1000px;
 }
 
 .vehicle-title {
@@ -198,8 +190,18 @@ textarea {
 }
 
 .form-vehicle, .message-vehicle {
-    width: 800px;
+    width: 100%;
+    max-width: 800px;
     border-radius: 10px;
+}
+
+.state {
+    margin-top: 10px;
+    margin-right: 20px;
+}
+
+.state-color {
+    color: green;
 }
 
 /*=============================
@@ -226,7 +228,8 @@ textarea {
 }
 
 .form-contact {
-    width: 1000px;
+    width: 100%;
+    max-width: 1000px;
     margin-top: 100px;
     margin-bottom: 100px;
 }

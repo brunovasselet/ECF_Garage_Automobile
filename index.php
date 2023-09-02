@@ -2,6 +2,11 @@
 
 session_start();
 
+if (isset($_POST['garage_action'])) {
+  $action = $_POST['garage_action'];
+  $_SESSION['garage_state'] = $action;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -83,6 +88,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           </ul>
           <div class="d-lg-flex col-lg-3 justify-content-lg-end">
 <?php
+
+if (isset($_COOKIE['garage_state'])) {
+  $garageState = $_COOKIE['garage_state'];
+
+  echo "<h5 class='state'>Le Garage est : <span class='state-color'>$garageState</span></h5>";
+
+} else {
+
+  echo "L'état du garage est inconnu.";
+
+}
 
           if (isset($_SESSION["logged_in"]) && $_SESSION["logged_in"]) {
           echo "<li class='nav-item dropdown'>

@@ -36,13 +36,14 @@ if ($result->num_rows != 1) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 <head>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/ECF_Garage_Automobile/node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/ECF_Garage_Automobile/style.css">
+    <link rel="stylesheet" href="/ECF_Garage_Automobile/media.css">
     <title>Garage V. Parrot</title>
 
 </head>
@@ -402,7 +403,7 @@ echo "<div class='col'>
 <?php
 
 echo "<div class='modal fade modal-details-vehicle' id='". $recipe["id"] ."' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
-          <div class='modal-dialog d-flex justify-content-center align-items-center' style='height: 115vh;'>
+          <div class='modal-dialog d-flex justify-content-center align-items-center height-modal'>
     <div class='modal-content rounded-4 shadow content-vehicles' id='vehicle'>
       <div class='modal-header p-5 pb-4 border-bottom-0'>
         <h1 class='fw-bold mb-0 fs-2'>Détails du Véhicule</h1>

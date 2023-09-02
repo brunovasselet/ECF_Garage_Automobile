@@ -1,6 +1,19 @@
 <?php
 session_start();
 
+if (isset($_POST['garage_action'])) {
+  $action = $_POST['garage_action'];
+  $_SESSION['garage_state'] = $action;
+}
+
+if (isset($_POST['garage_action'])) {
+  $action = $_POST['garage_action'];
+
+  $expiration = time() + 24 * 60 * 60; 
+
+  setcookie('garage_state', $action, $expiration, '/');
+}
+
 
 if (!(isset($_SESSION["logged_in"]) && $_SESSION["logged_in"])) {
 
@@ -37,7 +50,7 @@ if ($result->num_rows != 1) {
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 <head>
 
     <meta charset="UTF-8">
@@ -87,6 +100,41 @@ if ($result->num_rows != 1) {
 </header>
 
 <body>
+
+<h2 class="gestion-staff">État du Garage:</h2>
+
+<?php
+
+$garageState = "ferme";
+
+if(isset($_POST['garage_action'])){
+    $action = $_POST['garage_action'];
+    
+    if ($action === 'ouvert') {
+        $garageState = "ouvert";
+    }
+    
+    elseif ($action === 'fermer') {
+        $garageState = "ferme";
+    }
+}
+
+if ($garageState === 'ouvert') {
+    echo "<div class='d-flex justify-content-center'>
+          <form method='POST'>
+              <button class='btn btn-danger' type='submit' name='garage_action' value='fermer'>Fermer le garage</button>
+          </form>
+          </div>";
+} else {
+    echo "<div class='d-flex justify-content-center'>
+          <form method='POST'>
+              <button class='btn btn-success' type='submit' name='garage_action' value='ouvert'>Ouvrir le garage</button>
+          </form>
+          </div>";
+}
+
+?>
+
 
 <h2 class="gestion-staff">Gestion des Employées</h2>
 
@@ -439,7 +487,6 @@ echo "<div class='d-flex justify-content-center'>
           <h6 class='mb-0 subject-customer'>Sujet: " . $recipe["subject"] . "</h6>
           <p class='mb-0 message-customer'>Message: " . $recipe["message"] . "</p>
         </div>
-        <small class='opacity-50 text-nowrap'>now</small>
       </div>
     </a>
   </div>

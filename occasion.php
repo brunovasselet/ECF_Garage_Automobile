@@ -2,6 +2,11 @@
 
 session_start();
 
+if (isset($_POST['garage_action'])) {
+  $action = $_POST['garage_action'];
+  $_SESSION['garage_state'] = $action;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -12,6 +17,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/ECF_Garage_Automobile/node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/ECF_Garage_Automobile/style.css">
+    <link rel="stylesheet" href="/ECF_Garage_Automobile/media.css">
     <title>Garage V. Parrot</title>
 
 </head>
@@ -83,6 +89,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           </ul>
           <div class="d-lg-flex col-lg-3 justify-content-lg-end">
 <?php
+
+if (isset($_COOKIE['garage_state'])) {
+  $garageState = $_COOKIE['garage_state'];
+
+  echo "<h5 class='state'>Le Garage est : <span class='state-color'>$garageState</span></h5>";
+
+} else {
+
+  echo "L'état du garage est inconnu.";
+
+}
 
           if (isset($_SESSION["logged_in"]) && $_SESSION["logged_in"]) {
           echo "<li class='nav-item dropdown'>
@@ -195,7 +212,7 @@ echo "<div class='col'>
 <?php
 
 echo "<div class='modal fade modal-details-vehicle' id='". $recipe["id"] ."' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
-          <div class='modal-dialog d-flex justify-content-center align-items-center' style='height: 115vh;'>
+          <div class='modal-dialog d-flex justify-content-center align-items-center height-modal'>
     <div class='modal-content rounded-4 shadow content-vehicles' id='vehicle'>
       <div class='modal-header p-5 pb-4 border-bottom-0'>
         <h1 class='fw-bold mb-0 fs-2'>Détails du Véhicule</h1>
