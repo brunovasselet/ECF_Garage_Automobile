@@ -28,6 +28,7 @@
 
 .picture-vehicle {
     width: 1000px;
+    max-height: 800px;
 }
 
 @media screen and (max-width: 1200px){

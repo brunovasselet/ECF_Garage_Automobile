@@ -18,13 +18,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $comment = $_POST["comment"];
     $score = $_POST["score"];
 
-    $stmt = $conn->prepare("INSERT INTO testimonial (name, comment, score) VALUES (:name, :comment, :score)");
-    $stmt->bindParam(":name", $name);
-    $stmt->bindParam(":comment", $comment);
-    $stmt->bindParam(":score", $score);
-    
-    $stmt->execute();
-    header("Location: /ECF_Garage_Automobile/index.php");
+    if ($score >= 1 && $score <= 10) {
+        $stmt = $conn->prepare("INSERT INTO testimonial (name, comment, score) VALUES (:name, :comment, :score)");
+        $stmt->bindParam(":name", $name);
+        $stmt->bindParam(":comment", $comment);
+        $stmt->bindParam(":score", $score);
+        
+        $stmt->execute();
+        header("Location: /ECF_Garage_Automobile/index.php");
+    } else {
+        header("Location: /ECF_Garage_Automobile/index.php");
+        echo "Le score doit être compris entre 1 et 10.";
+    }
 }
 
 ?>

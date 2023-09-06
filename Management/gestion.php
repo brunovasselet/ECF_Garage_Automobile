@@ -9,7 +9,7 @@ if (isset($_POST['garage_action'])) {
 if (isset($_POST['garage_action'])) {
   $action = $_POST['garage_action'];
 
-  $expiration = time() + 24 * 60 * 60; 
+  $expiration = time() + 70 * 60 * 60;
 
   setcookie('garage_state', $action, $expiration, '/');
 }
@@ -84,7 +84,7 @@ if ($result->num_rows != 1) {
           <img class='profil dropdown-toggle' data-bs-toggle='dropdown' aria-expanded='false' src='/ECF_Garage_Automobile/img/photo_de_profil.jpg' alt='Profil'>
           <ul class='dropdown-menu'>
             <li><p class='dropdown-item'>Administrateur</p></li>
-            <li><a class='dropdown-item' href='/ECF_Garage_Automobile/gestion.php'>Gestion</a></li>
+            <li><a class='dropdown-item' href=''>Gestion</a></li>
             <li><a class='dropdown-item' href='/ECF_Garage_Automobile/deconnexion.php'>Déconnexion</a></li>
         </ul>
     </li>";
@@ -105,18 +105,18 @@ if ($result->num_rows != 1) {
 
 <?php
 
-$garageState = "ferme";
+$garageState = isset($_SESSION['garage_state']) ? $_SESSION['garage_state'] : 'ferme';
 
-if(isset($_POST['garage_action'])){
+if (isset($_POST['garage_action'])) {
     $action = $_POST['garage_action'];
-    
+
     if ($action === 'ouvert') {
         $garageState = "ouvert";
-    }
-    
-    elseif ($action === 'fermer') {
+    } elseif ($action === 'fermer') {
         $garageState = "ferme";
     }
+
+    $_SESSION['garage_state'] = $garageState; // Mettez à jour l'état du garage dans la session
 }
 
 if ($garageState === 'ouvert') {
@@ -253,12 +253,14 @@ $services = $servicesStatement->fetchAll();
 foreach ($services as $service) {
     $name = $service["name"];
     $description = $service["description"];
+    $price = $service["price"];
 }
 ?>
 
 <center><div class="carrosserie">
   <h3 class="titre-service"><?php echo $name; ?></h3>
   <p class="description-service"><?php echo $description; ?></p>
+  <p class="price-service"><?php echo $price; ?>€</p>
       <button class="btn btn-primary modification-service" data-bs-toggle="modal" data-bs-target="#modal-edition">Modifier</button>
         </div></center>
 
@@ -278,6 +280,8 @@ foreach ($services as $service) {
         <input type="text" class="form-control rounded-3" id="floatingInput" name="name" value="<?php echo $name; ?>">
 
             <textarea type="text" class="form-control rounded-3" id="floatingInput" name="description" placeholder="Description"  require="false"><?php echo $description; ?></textarea>
+
+            <input type="text" class="form-control rounded-3" id="floatingInput" name="price" value="<?php echo $price; ?>">
           <div class="text-center">
           <button class="mb-2 btn rounded-3 btn-primary" type="submit" name="submit">Modifier</button>
           </div>
@@ -306,12 +310,14 @@ $services = $servicesStatement->fetchAll();
 foreach ($services as $service) {
     $name = $service["name"];
     $description = $service["description"];
+    $price = $service["price"];
 }
 ?>
 
 <center><div class="carrosserie">
   <h3 class="titre-service"><?php echo $name; ?></h3>
   <p class="description-service"><?php echo $description; ?></p>
+  <p class="price-service"><?php echo $price; ?>€</p>
       <button class="btn btn-primary modification-service" data-bs-toggle="modal" data-bs-target="#modal-edition1">Modifier</button>
         </div></center>
 
@@ -331,6 +337,8 @@ foreach ($services as $service) {
         <input type="text" class="form-control rounded-3" id="floatingInput" name="name" value="<?php echo $name; ?>">
 
         <textarea type="text" class="form-control rounded-3" id="floatingInput" name="description" placeholder="Description"  require="false"><?php echo $description; ?></textarea>
+
+        <input type="text" class="form-control rounded-3" id="floatingInput" name="price" value="<?php echo $price; ?>">
           <div class="text-center">
           <button class="mb-2 btn rounded-3 btn-primary" type="submit" name="submit">Modifier</button>
           </div>
@@ -359,12 +367,14 @@ $services = $servicesStatement->fetchAll();
 foreach ($services as $service) {
     $name = $service["name"];
     $description = $service["description"];
+    $price = $service["price"];
 }
 ?>
 
 <center><div class="carrosserie">
   <h3 class="titre-service"><?php echo $name; ?></h3>
   <p class="description-service"><?php echo $description; ?></p>
+  <p class="price-service"><?php echo $price; ?>€</p>
       <button class="btn btn-primary modification-service" data-bs-toggle="modal" data-bs-target="#modal-edition2">Modifier</button>
         </div></center>
 
@@ -384,6 +394,8 @@ foreach ($services as $service) {
         <input type="text" class="form-control rounded-3" id="floatingInput" name="name" value="<?php echo $name; ?>">
 
             <textarea type="text" class="form-control rounded-3" id="floatingInput" name="description" placeholder="Description"  require="false"><?php echo $description; ?></textarea>
+
+            <input type="text" class="form-control rounded-3" id="floatingInput" name="price" value="<?php echo $price; ?>">
           <div class="text-center">
           <button class="mb-2 btn rounded-3 btn-primary" type="submit" name="submit">Modifier</button>
           </div>
@@ -412,12 +424,14 @@ $services = $servicesStatement->fetchAll();
 foreach ($services as $service) {
     $name = $service["name"];
     $description = $service["description"];
+    $price = $service["price"];
 }
 ?>
 
 <center><div class="carrosserie">
   <h3 class="titre-service"><?php echo $name; ?></h3>
   <p class="description-service"><?php echo $description; ?></p>
+  <p class="price-service"><?php echo $price; ?>€</p>
       <button class="btn btn-primary modification-service" data-bs-toggle="modal" data-bs-target="#modal-edition3">Modifier</button>
         </div></center>
 
@@ -437,6 +451,8 @@ foreach ($services as $service) {
         <input type="text" class="form-control rounded-3" id="floatingInput" name="name" value="<?php echo $name; ?>">
 
             <textarea type="text" class="form-control rounded-3" id="floatingInput" name="description" placeholder="Description"  require="false"><?php echo $description; ?></textarea>
+
+            <input type="text" class="form-control rounded-3" id="floatingInput" name="price" value="<?php echo $price; ?>">
           <div class="text-center">
           <button class="mb-2 btn rounded-3 btn-primary" type="submit" name="submit">Modifier</button>
           </div>

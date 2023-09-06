@@ -181,7 +181,7 @@ try {
     die("Connexion échouée : " . $e->getMessage());
 }
 
-$sqlQuery = "SELECT * FROM testimonial WHERE id";
+$sqlQuery = "SELECT * FROM testimonial WHERE approved = 0";
 $recipesStatement = $mysqlClient->prepare($sqlQuery);
 $recipesStatement->execute();
 $recipes = $recipesStatement->fetchAll();
@@ -197,8 +197,60 @@ echo "<div class='d-flex justify-content-center'>
     <a class='list-group-item list-group-item-action d-flex gap-3 py-3 bg-dark' aria-current='true'>
       <div class='d-flex gap-2 w-100 justify-content-between'>
         <div>
-          <h6 class='mb-0 info-customer'>" . $recipe["name"] . "</h6>
-          <h6 class='mb-0 subject-customer'>Commentaire: <br>" . $recipe["comment"] . "</h6>
+          <h6 class='mb-0 info-customer'>" . $recipe["name"] . "</h6><br>
+          <h6 class='mb-0 subject-customer'>" . $recipe["comment"] . "</h6><br>
+          <p class='mb-0 message-customer'>Note: " . $recipe["score"] . "/10</p>
+          <form method='POST' action='/ECF_Garage_Automobile/Score/approved.php'>
+          <input type='hidden' name='id' value='" . $recipe["id"] . "'>
+          <input type='hidden' name='approved' value='1'>
+          <button class='btn btn-success' type='submit' name='approve' value='Approuver'>Approuver</button>
+          <button class='btn btn-danger' type='submit' name='reject' value='Rejeter'>Rejeter</button>
+          </form>
+        </div>
+        <small class='opacity-50 text-nowrap'>Id: " . $recipe["id"] . "</small>
+      </div>
+    </a>
+  </div>
+</div>";
+
+    
+} ?>
+
+<h3 class="customers-messages">Approuvés</h3>
+
+<?php
+
+$serverIp = "127.0.0.1";
+$serverPort = 3306;
+$username = "root";
+$password = "root";
+$dbname = "garage";
+
+try {
+    $conn = new PDO("mysql:host=$serverIp;port=$serverPort;dbname=$dbname", $username, $password);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Connexion échouée : " . $e->getMessage());
+}
+
+$sqlQuery = "SELECT * FROM testimonial WHERE approved = 1";
+$recipesStatement = $mysqlClient->prepare($sqlQuery);
+$recipesStatement->execute();
+$recipes = $recipesStatement->fetchAll();
+
+foreach ($recipes as $recipe) {
+    $id = $recipe["id"];
+    $name = $recipe["name"];
+    $comment = $recipe["comment"];
+    $score = $recipe["score"];
+
+echo "<div class='d-flex justify-content-center'>
+        <div class='list-group list-messages'>
+    <a class='list-group-item list-group-item-action d-flex gap-3 py-3 bg-dark' aria-current='true'>
+      <div class='d-flex gap-2 w-100 justify-content-between'>
+        <div>
+          <h6 class='mb-0 info-customer'>" . $recipe["name"] . "</h6><br>
+          <h6 class='mb-0 subject-customer'>" . $recipe["comment"] . "</h6><br>
           <p class='mb-0 message-customer'>Note: " . $recipe["score"] . "/10</p>
         </div>
         <small class='opacity-50 text-nowrap'>Id: " . $recipe["id"] . "</small>
@@ -300,15 +352,17 @@ echo "<div class='d-flex justify-content-center'>
             <label for="floatingPassword">Prix du Véhicule</label>
           </div>
           <label for="file-input">
-          <input id="file-input" type="file" name="file">
+          <label for="floatingInput">Photo du Véhicule</label>
+          <input id="file-input" type="file" name="file" required>
           <div class="form-floating mb-3">
             <input type="text" class="form-control rounded-3" name="date"required>
-            <label for="floatingPassword">Date de mise en circulation du Véhicule</label>
+            <label for="floatingInput">Date de mise en circulation du Véhicule</label>
           </div>
           <div class="form-floating mb-3">
             <input type="text" class="form-control rounded-3" name="mileage"required>
-            <label for="floatingPassword">Kilométrage du Véhicule</label>
+            <label for="floatingInput">Kilométrage du Véhicule</label>
           </div>
+          <textarea type="text" class="form-control rounded-3" id="floatingInput" name="description" require="false"></textarea>
           <div class="text-center">
           <button class="w-30 mb-2 btn btn-lg rounded-3 btn-primary" type="submit" name="valider">Envoyer</button>
           </div>
@@ -347,7 +401,6 @@ echo "<div class='d-flex justify-content-center'>
     </div>
 </div>
 </div>
-
 <?php
 
 $serverIp = "127.0.0.1";
@@ -376,11 +429,13 @@ foreach ($recipes as $recipe) {
     $picture = $recipe["picture"];
     $date = $recipe["date"];
     $mileage = $recipe["mileage"];
+    $description = $recipe["description"];
 
     ?>
 
-<div class='row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 horizontal-cards'>
+<div class='row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 horizontal-cards justify-content-center'>
 <div class='row'>
+
   <?php
 echo "<div class='col'>
     <div class='card vehicle-card'>
@@ -388,8 +443,9 @@ echo "<div class='col'>
             <div class='card-body bg-dark text-light vehicle-card-body'>
                 <h3 class='card-text'>". $recipe["name"] ."</h3>
                 <p class='card-text'>". $recipe["price"] ." €</p>
+                <p class='card-text'>id: ". $recipe["id"] ."</p>
                 <div class='d-flex justify-content-center'>
-                <button class='w-30 mb-2 btn btn-lg rounded-4 btn-success details-vehicles' type='submit' name='valider' data-bs-toggle='modal' data-bs-target='#". $recipe["id"] ."'>Plus</button>
+                <button class='w-30 mb-2 btn btn-lg rounded-4 btn-success details-vehicles' type='submit' data-bs-toggle='modal' data-bs-target='#". $recipe["id"] ."'>Plus</button>
                 </div>
             </div>
         </div>
@@ -399,6 +455,7 @@ echo "<div class='col'>
 
 </div>
 </div>
+
 
 <?php
 
@@ -417,6 +474,7 @@ echo "<div class='modal fade modal-details-vehicle' id='". $recipe["id"] ."' tab
       <h5 class='specification'>Prix: ". $recipe["price"] ." €</h5>
       <h5 class='specification'>Année de mise en circulation: ". $recipe["date"] ."</h5>
       <h5 class='specification'>Kilométrage: ". $recipe["mileage"] ." Km</h5>
+      <h5 class='specification'>Description: ". $recipe["description"] ."</h5>
       </div>
       <h3 class='contact-vehicle'>Nous Contacter:</h3>
       <div class='d-flex justify-content-center'>

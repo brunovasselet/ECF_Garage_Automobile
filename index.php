@@ -228,6 +228,7 @@ foreach ($recipes as $recipe) {
 
     $name = $recipe["name"];
     $description = $recipe["description"];
+    $price = $recipe["price"];
 
 
     echo "<div class='d-flex justify-content-center'>
@@ -235,6 +236,7 @@ foreach ($recipes as $recipe) {
           <div class='card-body'>
           <h5 class='card-title'>". $recipe["name"] ."</h5>
           <p class='card-text'>". $recipe["description"] ."</p>
+          <p class='price-service'>". $recipe["price"] ."€</p>
           </div>
           </div>
           </div>
@@ -265,7 +267,7 @@ try {
     die("Connexion échouée : " . $e->getMessage());
 }
 
-$sqlQuery = "SELECT * FROM testimonial WHERE id";
+$sqlQuery = "SELECT * FROM testimonial WHERE approved = 1";
 $recipesStatement = $mysqlClient->prepare($sqlQuery);
 $recipesStatement->execute();
 $recipes = $recipesStatement->fetchAll();
@@ -313,12 +315,12 @@ echo "<div class='d-flex justify-content-center'>
           </div>
           <div class="form-floating mb-3">
             <input type="text" class="form-control rounded-3" name="comment" required>
-            <label for="floatingPassword">Commentaire</label>
+            <label for="floatingInput">Commentaire</label>
           </div>
           <div class="form-floating mb-3">
             <input type="text" class="form-control rounded-3" name="score" placeholder="/10" required>
-            <label for="floatingPassword">Note</label>
-            <p>Note sur 10.</p>
+            <label for="floatingInput">Note</label>
+            <p>Note entre 1 et 10.</p>
           </div>
           <div class="text-center">
           <button class="w-30 mb-2 btn btn-lg rounded-3 btn-primary" type="submit" name="valider">Envoyer</button>
@@ -382,13 +384,11 @@ echo "<div class='d-flex justify-content-center'>
 <div class="container">
   <footer class="py-3 my-4">
     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Features</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Pricing</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>
+      <li class="nav-item"><a href="" class="nav-link px-2 text-body-secondary">Accueil</a></li>
+      <li class="nav-item"><a href="/ECF_Garage_Automobile/occasion.php" class="nav-link px-2 text-body-secondary">Véhicules</a></li>
+      <li class="nav-item"><a href="/ECF_Garage_Automobile/contact.php" class="nav-link px-2 text-body-secondary">Contact</a></li>
     </ul>
-    <p class="text-center text-body-secondary">© 2023 Company, Inc</p>
+    <p class="text-center text-body-secondary">© 2023 Garage V. Parrot, Inc</p>
   </footer>
 </div>
 

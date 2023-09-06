@@ -244,13 +244,11 @@ echo "<button class='w-30 mb-2 btn btn-lg rounded-3 btn-primary' type='submit' d
 <div class="container">
   <footer class="py-3 my-4">
     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Features</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Pricing</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>
+      <li class="nav-item"><a href="/ECF_Garage_Automobile/index.php" class="nav-link px-2 text-body-secondary">Accueil</a></li>
+      <li class="nav-item"><a href="/ECF_Garage_Automobile/occasion.php" class="nav-link px-2 text-body-secondary">Véhicules</a></li>
+      <li class="nav-item"><a href="" class="nav-link px-2 text-body-secondary">Contact</a></li>
     </ul>
-    <p class="text-center text-body-secondary">© 2023 Company, Inc</p>
+    <p class="text-center text-body-secondary">© 2023 Garage V. Parrot, Inc</p>
   </footer>
 </div>
 

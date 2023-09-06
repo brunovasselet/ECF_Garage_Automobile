@@ -31,17 +31,19 @@ if(isset($_POST['submit'])) {
     // Récupérer les données saisies par l'utilisateur
     $name = $_POST['name'];
     $description = $_POST['description'];
+    $price = $_POST['price'];
 
     // Établir une connexion à la base de données
     $pdo = new PDO('mysql:host=localhost;dbname=garage', 'root', 'root');
 
     // Préparer la requête SQL
-    $stmt = $pdo->prepare("UPDATE services SET description = :description, name = :name WHERE id = '4'");
+    $stmt = $pdo->prepare("UPDATE services SET description = :description, name = :name, price = :price WHERE id = '4'");
 
     // Exécuter la requête SQL
     $stmt->execute(array(
         ':description' => $description,
-        ':name' => $name
+        ':name' => $name,
+        ':price' => $price
     ));
 
     // Afficher un message de confirmation

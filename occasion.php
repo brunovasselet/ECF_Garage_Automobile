@@ -160,6 +160,185 @@ if (isset($_COOKIE['garage_state'])) {
 
 <body>
 
+<form class="filtre-vehicles" method="POST" action="">
+    <label for="priceFilter">Prix :</label>
+    <select name="priceFilter">
+        <option value="Tous">Tous</option>
+        <option value="1000-5000">1000 - 5000</option>
+        <option value="5000-10000">5000 - 10000</option>
+        <option value="10000-20000">10000 - 20000</option>
+        <option value="20000-30000">20000 - 30000</option>
+    </select>
+
+    <label for="kilometersFilter">Kilométrage :</label>
+    <select name="kilometersFilter">
+        <option value="Tous">Tous</option>
+        <option value="0-10000">0 - 50000</option>
+        <option value="50000-100000">50000 - 100000</option>
+        <option value="100000-150000">100000 - 150000</option>
+    </select>
+
+    <label for="dateFilter">Date :</label>
+    <select name="dateFilter">
+        <option value="Tous">Tous</option>
+        <option value="2023">2023</option>
+        <option value="2022">2022</option>
+        <option value="2021">2021</option>
+        <option value="2020">2020</option>
+        <option value="2019">2019</option>
+        <option value="2018">2018</option>
+        <option value="2017">2017</option>
+        <option value="2016">2016</option>
+        <option value="2015">2015</option>
+        <option value="2014">2014</option>
+        <option value="2013">2013</option>
+        <option value="2012">2012</option>
+        <option value="2011">2011</option>
+        <option value="2010">2010</option>
+        <option value="2009">2009</option>
+        <option value="2008">2008</option>
+        <option value="2007">2007</option>
+        <option value="2006">2006</option>
+        <option value="2005">2005</option>
+        <option value="2004">2004</option>
+        <option value="2003">2003</option>
+        <option value="2002">2002</option>
+        <option value="2001">2001</option>
+        <option value="2000">2000</option>
+        <option value="1999">1999</option>
+        <option value="1998">1998</option>
+        <option value="1997">1997</option>
+        <option value="1996">1996</option>
+        <option value="1995">1995</option>
+        <option value="1994">1994</option>
+        <option value="1993">1993</option>
+        <option value="1992">1992</option>
+        <option value="1991">1991</option>
+        <option value="1990">1990</option>
+        <option value="1989">1989</option>
+        <option value="1988">1988</option>
+        <option value="1987">1987</option>
+        <option value="1986">1986</option>
+        <option value="1985">1985</option>
+    </select>
+
+    <input type="submit" name="submit" value="Filtrer">
+</form>
+
+<h2 class="text-center">Les Véhicules Filtrés</h2>
+
+<?php
+
+$dsn = "mysql:host=localhost;dbname=garage";
+$username = "root";
+$password = "root";
+
+try {
+    $pdo = new PDO($dsn, $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("La connexion à la base de données a échoué : " . $e->getMessage());
+}
+
+
+if(isset($_POST['submit'])){
+
+  $priceFilter = $_POST['priceFilter'];
+  $kilometersFilter = $_POST['kilometersFilter'];
+  $dateFilter = $_POST['dateFilter'];
+
+
+  $sql = "SELECT * FROM vehicles WHERE 1=1";
+
+  if ($priceFilter != "Tous") {
+
+      list($minPrice, $maxPrice) = explode("-", $priceFilter);
+
+
+      if ($minPrice == "1000") {
+          $minPrice = 1000;
+      }
+
+      $sql .= " AND price >= :minPrice AND price <= :maxPrice";
+  }
+
+  if ($kilometersFilter != "Tous") {
+
+      list($minKilometers, $maxKilometers) = explode("-", $kilometersFilter);
+
+
+      if ($minKilometers == "0") {
+          $minKilometers = 0;
+      }
+
+      $sql .= " AND mileage >= :minKilometers AND mileage <= :maxKilometers";
+  }
+
+  if ($dateFilter != "Tous") {
+      $sql .= " AND date = :dateFilter";
+  }
+
+
+  $stmt = $pdo->prepare($sql);
+
+
+  if ($priceFilter != "Tous") {
+      $stmt->bindParam(':minPrice', $minPrice, PDO::PARAM_INT);
+      $stmt->bindParam(':maxPrice', $maxPrice, PDO::PARAM_INT);
+  }
+
+  if ($kilometersFilter != "Tous") {
+      $stmt->bindParam(':minKilometers', $minKilometers, PDO::PARAM_INT);
+      $stmt->bindParam(':maxKilometers', $maxKilometers, PDO::PARAM_INT);
+  }
+
+  if ($dateFilter != "Tous") {
+      $stmt->bindParam(':dateFilter', $dateFilter, PDO::PARAM_INT);
+  }
+
+
+  $stmt->execute();
+
+
+    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if (count($results) > 0) {
+        foreach ($results as $row) {
+          ?>
+
+          <div class='row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 horizontal-cards marge-cards justify-content-center'>
+          <div class='row'>
+
+            <?php
+            echo "<div class='col'>
+    <div class='card vehicle-card'>
+            <img class='picture-card' src='/ECF_Garage_Automobile/img/Voitures/". $row["picture"] ."' alt='photo de voiture'>
+            <div class='card-body bg-dark text-light vehicle-card-body'>
+                <h3 class='card-text'>". $row["name"] ."</h3>
+                <p class='card-text'>". $row["price"] ." €</p>
+                <div class='d-flex justify-content-center'>
+                <button class='w-30 mb-2 btn btn-lg rounded-4 btn-success details-vehicles' type='submit' name='valider' data-bs-toggle='modal' data-bs-target='#". $row["id"] ."'>Plus</button>
+                </div>
+            </div>
+        </div>
+    </div>";
+
+    ?>
+
+    </div>
+    </div>
+    
+    <?php
+
+        }
+    } else {
+        echo "Aucun résultat trouvé.";
+    }
+}
+?>
+
+<h2 class="text-center">Tous les Véhicules</h2>
+
+
 <?php
 
 try
@@ -185,10 +364,11 @@ foreach ($recipes as $recipe) {
     $picture = $recipe["picture"];
     $date = $recipe["date"];
     $mileage = $recipe["mileage"];
+    $description = $recipe["description"];
 
     ?>
 
-<div class='row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 horizontal-cards marge-cards'>
+<div class='row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 horizontal-cards marge-cards justify-content-center'>
 <div class='row'>
   <?php
 echo "<div class='col'>
@@ -226,6 +406,7 @@ echo "<div class='modal fade modal-details-vehicle' id='". $recipe["id"] ."' tab
       <h5 class='specification'>Prix: ". $recipe["price"] ." €</h5>
       <h5 class='specification'>Année de mise en circulation: ". $recipe["date"] ."</h5>
       <h5 class='specification'>Kilométrage: ". $recipe["mileage"] ." Km</h5>
+      <h5 class='specification'>Description: ". $recipe["description"] ."</h5>
       </div>
       <h3 class='contact-vehicle'>Nous Contacter:</h3>
       <div class='d-flex justify-content-center'>
@@ -317,15 +498,15 @@ echo "<div class='modal fade modal-details-vehicle' id='". $recipe["id"] ."' tab
 <div class="container">
   <footer class="py-3 my-4">
     <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Features</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Pricing</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQs</a></li>
-      <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>
+      <li class="nav-item"><a href="/ECF_Garage_Automobile/index.php" class="nav-link px-2 text-body-secondary">Accueil</a></li>
+      <li class="nav-item"><a href="" class="nav-link px-2 text-body-secondary">Véhicules</a></li>
+      <li class="nav-item"><a href="/ECF_Garage_Automobile/contact.php" class="nav-link px-2 text-body-secondary">Contact</a></li>
     </ul>
-    <p class="text-center text-body-secondary">© 2023 Company, Inc</p>
+    <p class="text-center text-body-secondary">© 2023 Garage V. Parrot, Inc</p>
   </footer>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="/ECF_Garage_Automobile/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
