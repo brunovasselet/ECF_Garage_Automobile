@@ -161,26 +161,23 @@ if (isset($_COOKIE['garage_state'])) {
 <body>
 
 <form class="filtre-vehicles" method="POST" action="">
-    <label for="priceFilter">Prix :</label>
     <select name="priceFilter">
-        <option value="Tous">Tous</option>
+        <option value="Tous">Prix</option>
         <option value="1000-5000">1000 - 5000</option>
         <option value="5000-10000">5000 - 10000</option>
         <option value="10000-20000">10000 - 20000</option>
         <option value="20000-30000">20000 - 30000</option>
     </select>
 
-    <label for="kilometersFilter">Kilométrage :</label>
     <select name="kilometersFilter">
-        <option value="Tous">Tous</option>
+        <option value="Tous">Kilométrage</option>
         <option value="0-10000">0 - 50000</option>
         <option value="50000-100000">50000 - 100000</option>
         <option value="100000-150000">100000 - 150000</option>
     </select>
 
-    <label for="dateFilter">Date :</label>
     <select name="dateFilter">
-        <option value="Tous">Tous</option>
+        <option value="Tous">Date</option>
         <option value="2023">2023</option>
         <option value="2022">2022</option>
         <option value="2021">2021</option>
@@ -225,7 +222,7 @@ if (isset($_COOKIE['garage_state'])) {
     <input type="submit" name="submit" value="Filtrer">
 </form>
 
-<h2 class="text-center">Les Véhicules Filtrés</h2>
+<h2 class="text-center">Résultat de votre recherche :</h2>
 
 <?php
 

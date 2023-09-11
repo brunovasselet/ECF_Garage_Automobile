@@ -172,17 +172,15 @@ if (isset($_COOKIE['garage_state'])) {
           <div class="carousel-caption">
             <h1>Peugeot 208</h1>
             <p class="opacity-75">La peugeot 208 d'occasion.</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Voir l'Offre</a></p>
           </div>
         </div>
       </div>
       <div class="carousel-item">
-      <center><img src="/ECF_Garage_Automobile/img/Voitures/renault-clio-5.jpg" alt="Image de la Renault Clio 5"></center>
+      <center><img src="/ECF_Garage_Automobile/img/Voitures/renaultclio5.jpg" alt="Image de la Renault Clio 5"></center>
         <div class="container">
           <div class="carousel-caption">
             <h1>Renault Clio 5</h1>
             <p class="opacity-75">La Renault Clio 5 d'occasion.</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Voir l'Offre</a></p>
           </div>
         </div>
       </div>
@@ -192,7 +190,6 @@ if (isset($_COOKIE['garage_state'])) {
           <div class="carousel-caption">
             <h1>Citroën C4</h1>
             <p class="opacity-75">La Citroën C4 d'occasion.</p>
-            <p><a class="btn btn-lg btn-primary" href="#">Voir l'Offre</a></p>
           </div>
         </div>
       </div>
@@ -207,7 +204,7 @@ if (isset($_COOKIE['garage_state'])) {
     </button>
   </div>
 
-  <h2 class="titre-services">Besoin de Réparations ?</h2>
+  <h2 class="titre-services">Nos Services</h2>
 
   <?php
 try
@@ -279,18 +276,14 @@ foreach ($recipes as $recipe) {
     $score = $recipe["score"];
 
 echo "<div class='d-flex justify-content-center'>
-        <div class='list-group list-messages'>
-    <a class='list-group-item list-group-item-action d-flex gap-3 py-3 bg-dark' aria-current='true'>
-      <div class='d-flex gap-2 w-100 justify-content-between'>
-        <div>
+           <div class='card' style='width: 80rem;'>
+           <div class='card-body'>
           <h6 class='mb-0 info-customer'>" . $recipe["name"] . "</h6>
           <h6 class='mb-0 subject-customer'>Commentaire: <br>" . $recipe["comment"] . "</h6>
           <p class='mb-0 message-customer'>Note: " . $recipe["score"] . "/10</p>
         </div>
-      </div>
-    </a>
-  </div>
-</div>";
+        </div>
+        </div>";
 
     
 } ?>

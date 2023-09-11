@@ -216,7 +216,7 @@ echo "<div class='d-flex justify-content-center'>
     
 } ?>
 
-<h3 class="customers-messages">Approuvés</h3>
+<h3 class="customers-messages">Témoignages Approuvés</h3>
 
 <?php
 
@@ -245,18 +245,14 @@ foreach ($recipes as $recipe) {
     $score = $recipe["score"];
 
 echo "<div class='d-flex justify-content-center'>
-        <div class='list-group list-messages'>
-    <a class='list-group-item list-group-item-action d-flex gap-3 py-3 bg-dark' aria-current='true'>
-      <div class='d-flex gap-2 w-100 justify-content-between'>
-        <div>
-          <h6 class='mb-0 info-customer'>" . $recipe["name"] . "</h6><br>
-          <h6 class='mb-0 subject-customer'>" . $recipe["comment"] . "</h6><br>
-          <p class='mb-0 message-customer'>Note: " . $recipe["score"] . "/10</p>
-        </div>
-        <small class='opacity-50 text-nowrap'>Id: " . $recipe["id"] . "</small>
-      </div>
-    </a>
-  </div>
+<div class='card' style='width: 80rem;'>
+<div class='card-body'>
+<h6 class='mb-0 info-customer'>" . $recipe["name"] . "</h6>
+<h6 class='mb-0 subject-customer'>Commentaire: <br>" . $recipe["comment"] . "</h6>
+<p class='mb-0 message-customer'>Note: " . $recipe["score"] . "/10</p>
+<p class='mb-0 message-customer'>Id: " . $recipe["id"] . "</p>
+</div>
+</div>
 </div>";
 
     

@@ -86,6 +86,14 @@ td {
     border: 1px solid;
 }
 
+.info-customer {
+    padding-bottom: 10px;
+}
+
+.subject-customer {
+    padding-bottom: 10px;
+}
+
 /*=============================
 ===========Gestion=============
 =============================*/
