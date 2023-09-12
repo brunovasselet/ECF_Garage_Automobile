@@ -1,0 +1,181 @@
+.content-vehicles {
+    width: 1200px;
+}
+
+@media screen and (max-width: 1200px){
+    .content-vehicles {
+        width: 1000px;
+    }
+}
+
+@media screen and (max-width: 1000px){
+    .content-vehicles {
+        width: 800px;
+    }
+}
+
+@media screen and (max-width: 800px){
+    .content-vehicles {
+        width: 600px;
+    }
+}
+
+@media screen and (max-width: 600px){
+    .content-vehicles {
+        width: 400px;
+    }
+}
+
+.picture-vehicle {
+    width: 1000px;
+    max-height: 800px;
+}
+
+@media screen and (max-width: 1200px){
+    .picture-vehicle {
+        width: 800px;
+   }
+}
+
+@media screen and (max-width: 1000px){
+    .picture-vehicle {
+        width: 600px;
+   }
+}
+
+@media screen and (max-width: 800px){
+    .picture-vehicle {
+        width: 400px;
+   }
+}
+
+@media screen and (max-width: 600px){
+    .picture-vehicle {
+        width: 300px;
+   }
+}
+
+.height-modal {
+    height: 115vh;
+}
+
+@media screen and (max-height: 1200px){
+    .height-modal {
+        height: 130vh;
+   }
+}
+
+@media screen and (max-height: 1000px){
+    .height-modal {
+        height: 140vh;
+   }
+}
+
+@media screen and (max-height: 900px){
+    .height-modal {
+        height: 150vh;
+   }
+}
+
+@media screen and (max-height: 850px){
+    .height-modal {
+        height: 160vh;
+   }
+}
+
+@media screen and (max-height: 800px){
+    .height-modal {
+        height: 170vh;
+   }
+}
+
+@media screen and (max-height: 750px){
+    .height-modal {
+        height: 180vh;
+   }
+}
+
+@media screen and (max-height: 700px){
+    .height-modal {
+        height: 190vh;
+   }
+}
+
+@media screen and (max-height: 650px){
+    .height-modal {
+        height: 210vh;
+   }
+}
+
+@media screen and (max-height: 600px){
+    .height-modal {
+        height: 230vh;
+   }
+}
+
+@media screen and (max-height: 550px){
+    .height-modal {
+        height: 260vh;
+   }
+}
+
+@media screen and (max-height: 500px){
+    .height-modal {
+        height: 270vh;
+   }
+}
+
+@media screen and (max-height: 450px){
+    .height-modal {
+        height: 290vh;
+   }
+}
+
+@media screen and (max-height: 400px){
+    .height-modal {
+        height: 340vh;
+   }
+}
+
+
+@media screen and (max-height: 350px){
+    .height-modal {
+        height: 380vh;
+   }
+}
+
+@media screen and (max-height: 320px){
+    .height-modal {
+        height: 400vh;
+   }
+}
+
+@media screen and (max-height: 300px){
+    .height-modal {
+        height: 440vh;
+   }
+}
+
+@media screen and (max-height: 280px){
+    .height-modal {
+        height: 480vh;
+   }
+}
+
+@media screen and (max-height: 250px){
+    .height-modal {
+        height: 520vh;
+   }
+}
+
+@media screen and (max-height: 230px){
+    .height-modal {
+        height: 550vh;
+   }
+}
+
+@media screen and (max-height: 200px){
+    .height-modal {
+        height: 620vh;
+   }
+}

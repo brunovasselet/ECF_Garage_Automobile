@@ -1,0 +1,260 @@
+body {
+    background-color: #1c1c1c;
+    overflow-x: hidden;
+}
+
+.nav-link {
+    font-weight: bold;
+}
+
+.modal-connexion {
+    height: 100%;
+}
+
+.profil {
+    height: 50px;
+    width: 50px;
+    border-radius: 25px;
+}
+
+.profil:hover {
+    cursor: pointer;
+}
+
+.dropdown {
+    margin-right: 100px;
+}
+
+.modal-content {
+    margin-top: 80%;
+}
+
+.carousel, h1, p {
+    color: #ffffff;
+}
+
+.carousel, .carousel-item {
+    height: 500px;
+}
+
+.carousel-item {
+    background-color: #212529;
+}
+
+.titre-services {
+    color: #ffffff;
+    text-align: center;
+    text-decoration: underline;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.reparations {
+    display: inline-flex;
+    justify-content: center;
+    text-align: center;
+}
+.card {
+    margin: 10px;
+}
+
+.title-timetables, .title-testimonial {
+    color: #ffffff;
+    text-align: center;
+    text-decoration: underline;
+    margin-top: 50px;
+}
+
+.button-testimonial {
+    margin-top: 50px;
+}
+
+.horaires {
+    color: #ffffff;
+    width: 800px;
+    margin-top: 50px;
+    font-size: 20px;
+    border: 1px solid;
+}
+
+.jours {
+    padding-left: 20px;
+}
+
+td {
+    width: 150px;
+    border: 1px solid;
+}
+
+.info-customer {
+    padding-bottom: 10px;
+}
+
+.subject-customer {
+    padding-bottom: 10px;
+}
+
+/*=============================
+===========Gestion=============
+=============================*/
+
+.list-employees {
+    width: 1000px;
+    color: #ffffff;
+    background-color: #34495E;
+}
+
+.button-supp {
+    margin-top: 5px;
+}
+
+.gestion-staff {
+    margin-bottom: 50px;
+}
+
+.mail-cel, .mdp-cel {
+    width: 200px;
+    height: 30px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.gestion-staff, .customers-messages {
+    color: #ffffff;
+    text-align: center;
+    text-decoration: underline;
+}
+
+.gestion-services {
+    color: #ffffff;
+    text-align: center;
+    text-decoration: underline;
+}
+
+.carrosserie {
+    color: #ffffff;
+    background-color: #333333;
+    width: 1000px;
+    border-radius: 25px;
+}
+
+.gestion-staff, .customers-messages, .gestion-services, .carrosserie, .list-group, .button-add, .add-vehicles, .supp-message {
+    margin-top: 50px;
+}
+
+.titre-service {
+    padding-top: 20px;
+}
+
+.modification-service {
+    margin-bottom: 20px;
+}
+
+.form-control {
+    margin-top: 20px;
+}
+
+textarea {
+    height: 100px;
+    margin-bottom: 20px;
+}
+
+.list-group-item {
+    width: 1000px;
+    color: #ffffff;
+}
+
+.vehicle-card {
+    width: 400px;
+    border-color: #1c1c1c;
+    background: none;
+    margin-top: 30px;
+}
+
+.vehicle-card-body {
+    border-radius: 0px 0px 20px 20px;
+}
+
+.picture-card {
+    border-radius: 20px 20px 0px 0px;
+    max-height: 300px;
+}
+
+.vehicle-title {
+    margin-bottom: 50px;
+}
+
+.specification {
+    text-align: left;
+}
+
+.message-title-detail {
+    color: black;
+}
+
+.contact-vehicle {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.form-vehicle, .message-vehicle {
+    width: 100%;
+    max-width: 800px;
+    border-radius: 10px;
+}
+
+.state {
+    margin-top: 10px;
+    margin-right: 20px;
+}
+
+.state-color {
+    color: green;
+}
+
+/*=============================
+===========Véhicules=============
+=============================*/
+
+.filtre-vehicles {
+    margin-bottom: 50px;
+}
+
+.horizontal-cards {
+    display: inline-flex;
+}
+
+.marge-cards {
+    margin-top: 50px;
+}
+
+/*=============================
+===========Contact=============
+=============================*/
+
+.titre-contact {
+    color: #ffffff;
+    text-align: center;
+    text-decoration: underline;
+    margin-top: 50px;
+}
+
+.form-contact {
+    width: 100%;
+    max-width: 1000px;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+.message {
+    height: 200px;
+    width: 1000px;
+    border-radius: 10px;
+}
+
+.message-title {
+    color: #ffffff;
+    margin-bottom: 10px;
+}
